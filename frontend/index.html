@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Vectorizer - Raster to Vector Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Image Vectorizer</h1>
+            <p class="subtitle">Convert raster images to SVG/EPS vector formats</p>
+        </header>
+
+        <main>
+            <!-- Service Status -->
+            <div id="statusBar" class="status-bar">
+                <span id="statusIndicator">⚪</span>
+                <span id="statusText">Checking service...</span>
+            </div>
+
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="file-drop-area" id="dropArea">
+                    <div class="file-icon">📁</div>
+                    <h3>Drop images here or click to browse</h3>
+                    <p>Supports PNG, JPG, JPEG (Max 10MB per file)</p>
+                    <input type="file" id="fileInput" multiple accept=".png,.jpg,.jpeg" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Select Files
+                    </button>
+                </div>
+
+                <!-- File Preview -->
+                <div id="filePreview" class="file-preview"></div>
+            </section>
+
+            <!-- Options Section -->
+            <section class="options-section">
+                <h3>⚙️ Processing Options</h3>
+                
+                <div class="option-group">
+                    <label for="threshold">
+                        Black Threshold (0-255):
+                        <span class="option-hint">Lower = more black shapes detected</span>
+                    </label>
+                    <input type="range" id="threshold" min="0" max="255" value="120">
+                    <span id="thresholdValue" class="value-display">120</span>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="includeEPS" checked>
+                        Include EPS files (CMYK color space)
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="groupByPrefix" checked>
+                        Group images by filename prefix
+                    </label>
+                </div>
+            </section>
+
+            <!-- Action Button -->
+            <section class="action-section">
+                <button class="btn btn-success btn-large" id="processBtn" onclick="processImages()">
+                    🚀 Convert to Vector
+                </button>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">Processing...</p>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h3>✅ Processing Complete!</h3>
+                <p id="resultsText"></p>
+                <button class="btn btn-primary" id="downloadBtn">
+                    ⬇️ Download ZIP
+                </button>
+            </section>
+        </main>
+
+        <footer>
+            <p>🛠️ Need customization? Contact: Qaisar Rafique | 📞 0305-7425107</p>
+            <p class="tech-note">Powered by Potrace & Ghostscript</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
